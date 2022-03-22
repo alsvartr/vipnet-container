@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 KEY_FILE="/tmp/key.dst"
 VIPNET="/usr/bin/vipnetclient"
@@ -11,11 +11,12 @@ if [ "$no_keys" -gt 0 ]; then
 	echo "no keys installed"
 
 	if [ ! -f ${KEY_FILE} ]; then
-    echo "${KEY_FILE} empty, mount it from host and then run again"
+		echo "${KEY_FILE} empty, mount it from host and then run again"
 		exit 1
 	else
 		echo "trying to install key from ${KEY_FILE}"
 		${VIPNET} installkeys ${KEY_FILE} --no-start --no-autostart
+		echo "all done, restart container"
 		exit 0
 	fi
 
